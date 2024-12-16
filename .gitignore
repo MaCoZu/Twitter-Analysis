@@ -3,6 +3,5 @@ node_modules/
 yarn-error.log
 _drafts
 data/
-dist/
 *.csv
 outtakes.md

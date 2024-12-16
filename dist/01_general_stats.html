@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>General Statistics | Twitter Analysis</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="modulepreload" href="./_observablehq/client.4585fc9a.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_import/components/tweets_times.cc2952cb.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/84d7b8e9.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/2c0cdfa2.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/626bedc4.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/5851d7ef.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/dcd02767.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/f1db2593.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/034b7bcb.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/4bb53638.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/bbafde58.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/aa5b35a8.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/32c7fec2.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/567840a0.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/cf9b720b.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/5dcd62f4.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/f8e03c56.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/5bc129e1.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/19c92b44.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/1ee6c50d.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.4585fc9a.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
+
+registerFile("./data/times_daily.csv", {"name":"./data/times_daily.csv","mimeType":"text/csv","path":"./_file/data/times_daily.327aedd2.csv","lastModified":1734297188708,"size":126});
+registerFile("./data/times_monthly.csv", {"name":"./data/times_monthly.csv","mimeType":"text/csv","path":"./_file/data/times_monthly.ea8e304a.csv","lastModified":1734120569166,"size":256});
+registerFile("./data/times_ym.csv", {"name":"./data/times_ym.csv","mimeType":"text/csv","path":"./_file/data/times_ym.3430c1ed.csv","lastModified":1734120569166,"size":1511});
+
+define({id: "478499d5", body: () => {
+// import * as Plot from "@observablehq/plot";
+}});
+
+define({id: "3b9738bf", mode: "inline", inputs: ["resize","data_ym","tweets_ym","display"], body: async (resize,data_ym,tweets_ym,display) => {
+display(await(
+resize((width) => data_ym && tweets_ym(data_ym, "#chart-ym", { width }))
+))
+}});
+
+define({id: "9c8d3d77", inputs: ["d3","FileAttachment"], outputs: ["tweets_ym","parseDate","data_ym"], body: async (d3,FileAttachment) => {
+const {tweets_ym} = await import("./_import/components/tweets_times.cc2952cb.js");
+
+const parseDate = d3.timeParse("%m/%d/%Y");
+const data_ym = await FileAttachment("./data/times_ym.csv")
+  .csv({ typed: true })
+  .then(rawData => rawData.map(d => ({
+    date: parseDate(d.year_month),
+    count: +d.count,
+  })));
+return {tweets_ym,parseDate,data_ym};
+}});
+
+define({id: "20ae4485", inputs: ["FileAttachment","Plot","d3"], outputs: ["tweetData","MonthlyPlot"], body: async (FileAttachment,Plot,d3) => {
+const tweetData = await FileAttachment("./data/times_monthly.csv").csv({ typed: true }) 
+
+function MonthlyPlot(data, {width} = {}) {
+  return Plot.plot({
+  title: "Average Monthly Tweets",
+    marginLeft: 60,
+     x: {
+      tickFormat: Plot.formatMonth(), // Format x-axis ticks to abbreviated month names
+      ticks: 12, // Ensure there’s one tick for each month
+      tickSize: 0,
+      tickPadding: 20,
+      label:""
+    },
+    y: {
+      tickFormat: (d) => `${d / 1000}k`,
+      tickSize: 0,
+      ticks: 3,
+      label:""
+    },
+    color: {
+    type: "diverging",
+    scheme: "GnBu"
+  },
+  marks: [
+    Plot.barY(tweetData, {x: "m_number", y: "tweets", fill: "tweets", sort: "x",
+        title: (d) => {
+          const format = d3.format(",.0f"); // Format as a whole number with commas for thousands
+          return `${d.Month}\n${format(d.tweets)} Tweets`;}}),
+
+    Plot.ruleY([0])
+  ]
+})
+}
+return {tweetData,MonthlyPlot};
+}});
+
+define({id: "e12c8fdb", inputs: ["FileAttachment","Plot","d3"], outputs: ["data_daily","DailyPlot"], body: async (FileAttachment,Plot,d3) => {
+const data_daily = await FileAttachment("./data/times_daily.csv").csv({ typed: true }) 
+
+function DailyPlot(data, {width}) {
+  const weekdayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+  return Plot.plot({
+  title: "Average Daily Tweets",
+  marginLeft: 60,
+  marginBottom: 40,
+  x: {
+    domain: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ], // Correct order
+    label: "",
+    tickSize: 0,
+    tickPadding: 20, // Remove x-axis label
+    tickFormat: (day) => day.slice(0, 3) 
+  },
+  y: {
+    label: "", // Remove y-axis label
+    ticks: 3, // Number of ticks
+    tickSize: 0,
+
+  },
+  color: {
+    type: "diverging",
+    scheme: "GnBu"
+  },
+  marks: [
+    Plot.barY(data_daily, {
+      x: "day", // Use "day" for x-axis
+      y: "avg_count", // Use "avg_daily_tweets" for y-axis
+      fill: "avg_count", // Map fill to "avg_daily_tweets" for coloring
+         title: (d) => {
+          const format = d3.format(",.0f"); // Format as a whole number with commas for thousands
+          return `${d.day}\n${format(d.avg_count)} Tweets`;}
+    }),
+    Plot.ruleY([0]) // Add a baseline at y = 0
+  ]
+})}
+return {data_daily,DailyPlot};
+}});
+
+define({id: "ec29cbc8", mode: "inline", inputs: ["resize","MonthlyPlot","tweetData","display"], body: async (resize,MonthlyPlot,tweetData,display) => {
+display(await(
+resize((width) => MonthlyPlot(tweetData, {width}))
+))
+}});
+
+define({id: "cb37f416", mode: "inline", inputs: ["resize","DailyPlot","data_daily","display"], body: async (resize,DailyPlot,data_daily,display) => {
+display(await(
+resize((width) =>   DailyPlot(data_daily, {width}))
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Twitter Analysis</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Statistics</summary>
+    <ol>
+    <li class="observablehq-link observablehq-link-active"><a href="./01_general_stats">Tweet Times</a></li>
+    <li class="observablehq-link"><a href="./02_tweet_times">Next</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#tweets-over-time">Tweets over time</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<div class="observablehq observablehq--block"><!--:478499d5:--></div>
+<style>
+    .plot-title {
+    font-size: 28px;        /* Larger title font size */
+    font-weight: bold;      /* Bold text */
+    color: darkblue;        /* Title color */
+    text-align: center;     /* Center the title */
+    font-family: "Georgia", serif; /* Custom font family */
+    margin-bottom: 20px;    /* Add spacing below the title */
+    text-transform: uppercase; /* Uppercase letters */
+    letter-spacing: 1px;    /* Spacing between letters */
+    text-align: center;   /* Center the title */
+    font-size: 28px;      /* Increase the font size */
+    font-weight: bold;    /* Bold title */
+    font-family: "Arial, sans-serif"; /* Custom font */
+    margin-top: 20px;     /* Add spacing above */
+  }
+
+  /* Default (Light Mode) */
+  .chart-title, .chart-legend {
+    fill: black; /* Title and legend text in black */
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .chart-title, .chart-legend {
+      fill: white; /* Title and legend text in white */
+    }
+  }
+
+  svg {
+    max-width: 100%; /* Ensure the SVG scales within its container */
+    height: auto;    /* Maintain aspect ratio */
+  }
+
+.d3-tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+}
+
+  /* Set line length */
+  .content {
+    max-width: 800px; /* Adjust line length */
+    margin: 0 auto;   /* Center the content */
+  }
+
+  /* Change font type */
+  body {
+    /* font-family: "Calibri", Arial, sans-serif;  */
+    line-height: 1.5; /* Improve readability */
+    font-size: 20px;
+  }
+
+  /* Code block styling */
+  pre code {
+    font-family: "Fira Code",  monospace; /* Monospaced font for code */
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-x: auto; /* Allow horizontal scroll */
+  }
+</style>
+<h1 id="general" tabindex="-1"><a class="observablehq-header-anchor" href="#general">General</a></h1>
+<!-- Cards with big numbers -->
+<div class="grid grid-cols-4 ">
+  <div class="card">
+    <h2>Twitter Accounts</h2>
+    <span class="big">545</span>
+  </div>
+  <div class="card">
+    <h2>Tweets</h2>
+    <span class="big">1243370
+    </span>
+  </div>
+  <div class="card">
+    <h2>FROM</h2>
+    <span class="big">08-2008</span>
+  </div>
+  <div class="card">
+    <h2>TO</h2>
+    <span class="big">06-2017</span>
+  </div>
+</div>
+<h1 id="tweets-over-time" tabindex="-1"><a class="observablehq-header-anchor" href="#tweets-over-time">Tweets over time</a></h1>
+<p>Twitter activity has risen continuously over the observed timespan.</p>
+<div id="chart-ym"></div>
+<span><observablehq-loading></observablehq-loading><!--:3b9738bf:--></span>
+<div class="observablehq observablehq--block"><!--:9c8d3d77:--></div>
+<!-- MonthlyPlot -->
+<div class="observablehq observablehq--block"><!--:20ae4485:--></div>
+<!-- DailyPlot  -->
+<div class="observablehq observablehq--block"><!--:e12c8fdb:--></div>
+<div class="grid grid-cols-2">
+  <div class="card">
+    <observablehq-loading></observablehq-loading><!--:ec29cbc8:-->
+  </div>
+  <div class="card">
+    <observablehq-loading></observablehq-loading><!--:cb37f416:-->
+  </div>
+</div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./"><span>Twitter Analysis</span></a><a rel="next" href="./02_tweet_times"><span>Next</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-12-16T19:13:22">Dec 16, 2024</a>.</div>
+</footer>
+</div>
+</body>
+</html>
