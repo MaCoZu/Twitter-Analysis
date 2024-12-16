@@ -117,7 +117,7 @@ const data_ym = await FileAttachment("./data/times_ym.csv")
 ```js
 
 const tweetData = await FileAttachment("./data/times_monthly.csv").csv({ typed: true }) 
-
+ 
 function MonthlyPlot(data, {width} = {}) {
   return Plot.plot({
   title: "Average Monthly Tweets",
