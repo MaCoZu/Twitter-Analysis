@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Twitter Analysis</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="modulepreload" href="./_observablehq/client.e174b4b6.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import "./_observablehq/client.e174b4b6.js";
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link observablehq-link-active"><a href="./">Twitter Analysis</a></li>
+  </ol>
+  <section>
+    <summary>Statistics</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./01_tweet_times">Tweet Times</a></li>
+    <li class="observablehq-link"><a href="./02_friends_followers">Friends &amp; Followers</a></li>
+    <li class="observablehq-link"><a href="./03_likes_retweets">Likes &amp; Retweets</a></li>
+    <li class="observablehq-link"><a href="./04_hashtags">Hashtags</a></li>
+    <li class="observablehq-link"><a href="./05_tweets">Tweets</a></li>
+    <li class="observablehq-link"><a href="./10_notebooks">Notebooks</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<div class="hero">
+  <h1>Congressional Tweeting</h1>
+</div>
+<style>
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(serif);
+  margin: 0rem 0 8rem;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 1rem 0; /* Add space above and below the heading */
+  padding: 1rem 0; /* Internal spacing (vertical padding) */
+  max-width: none; /* Ensure the heading does not have a maximum width constraint */
+  font-size: 14vw; /* Dynamic font size based on the viewport width */
+  font-weight: 900; /* Set the font weight to very bold */
+  line-height: 1; /* Reduce the spacing between lines (compact text) */
+  
+  background: linear-gradient(90deg, #ff7f50, #1e90ff); /* Coral to Dodger Blue */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 60px;
+  }
+}
+</style>
+<div class="grid grid-cols-4 ">
+  <div class="card">
+    <h2>Twitter Accounts</h2>
+    <span class="big">545</span>
+  </div>
+  <div class="card">
+    <h2>Tweets</h2>
+    <span class="big">1243370
+    </span>
+  </div>
+  <div class="card">
+    <h2>FROM</h2>
+    <span class="big">08-2008</span>
+  </div>
+  <div class="card">
+    <h2>TO</h2>
+    <span class="big">06-2017</span>
+  </div>
+</div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="next" href="./01_tweet_times"><span>Tweet Times</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-12-27T09:15:08">Dec 27, 2024</a>.</div>
+</footer>
+</div>
+</body>
+</html>

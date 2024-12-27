@@ -1,0 +1,8 @@
+src/.observablehq
+.DS_Store
+node_modules/
+yarn-error.log
+_drafts
+src/outtakes.md
+*.csv
+src/data
