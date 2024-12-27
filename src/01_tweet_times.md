@@ -1,6 +1,6 @@
 ---
 theme: dashboard
-title: General Statistics
+title: Tweet Times
 toc: true
 ---
 

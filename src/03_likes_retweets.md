@@ -1,7 +1,6 @@
 ---
 theme: dashboard
 title: Likes & Retweets
-toc: true
 ---
 
 <style>

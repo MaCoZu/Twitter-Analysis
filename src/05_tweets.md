@@ -1,8 +1,6 @@
 ---
-theme: wide
+theme: dashboard
 title: Tweets
-toc: true
-styles: custom-style.css
 ---
 
 <style>

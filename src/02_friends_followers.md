@@ -1,8 +1,7 @@
 ---
 theme: dashboard
-title: General Statistics
+title: Friends & Followers
 toc: true
-style: custom-style.css
 ---
 
 <style>

@@ -1,8 +1,7 @@
 ---
 theme: dashboard
-title: Tweet Times
+title: Hashtags
 toc: true
-styles: custom-style.css
 ---
 
 <style>

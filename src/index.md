@@ -1,5 +1,7 @@
 ---
-toc: false
+theme: dashboard
+title: Tweets
+toc: true
 ---
 
 <div class="hero">
