@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Tweets | Twitter Analysis</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="modulepreload" href="./_observablehq/client.e174b4b6.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_import/components/makeTreeMap.c44e88a1.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/84d7b8e9.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/2c0cdfa2.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/626bedc4.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/5851d7ef.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/dcd02767.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/f1db2593.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/034b7bcb.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/4bb53638.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/bbafde58.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/aa5b35a8.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/32c7fec2.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/567840a0.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/cf9b720b.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/5dcd62f4.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/f8e03c56.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/5bc129e1.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/19c92b44.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.e174b4b6.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
+
+registerFile("./data/tweets_top1000_likes.csv", {"name":"./data/tweets_top1000_likes.csv","mimeType":"text/csv","path":"./_file/data/tweets_top1000_likes.99a4b4cc.csv","lastModified":1736109076763,"size":163825});
+registerFile("./data/tweets_top1000_rt.csv", {"name":"./data/tweets_top1000_rt.csv","mimeType":"text/csv","path":"./_file/data/tweets_top1000_rt.66301eab.csv","lastModified":1743771052340,"size":169833});
+
+define({id: "433803c5", inputs: ["d3","FileAttachment","display"], outputs: ["MakeTreemapData","data","makeTreeMap","svg"], body: async (d3,FileAttachment,display) => {
+const {makeTreeMap} = await import("./_import/components/makeTreeMap.c44e88a1.js");
+async function MakeTreemapData(fileAttachment) {
+  // Load and parse the data from the attachment
+  const data_l = await fileAttachment.csv({ typed: true });
+
+  // Sort the flat data by likes (descending) and take the top 1000
+  const sortedData = data_l
+    .sort((a, b) => b.likes - a.likes) // Sort by likes descending
+    .slice(0, 1000);
+
+  // Structure the hierarchical data
+  return {
+    name: "root",
+    children: d3
+      .groups(sortedData, (d) => d.name) // Group by full_name
+      .map(([name, tweets]) => ({
+        name: name, // Group name (full_name)
+        children: tweets.map((tweet) => ({
+          name: tweet.tweet, // Tweet text
+          value: +tweet.likes // Size based on likes
+        }))
+      }))
+  };
+}
+
+// Usage
+const data = await MakeTreemapData(
+  FileAttachment("./data/tweets_top1000_likes.csv")
+);
+
+
+
+const svg = makeTreeMap(data, { width: 1400, height: 800, colorScheme: d3.schemeCategory10, tileMethod: d3.treemapSquarify, legendFontSize: 23, showText: false, metricName: 'Likes' });
+
+display(svg);
+
+return {MakeTreemapData,data,makeTreeMap,svg};
+}});
+
+define({id: "6d691902", inputs: ["d3","FileAttachment","display"], outputs: ["MakeTreemapData","data","makeTreeMap","svg"], body: async (d3,FileAttachment,display) => {
+const {makeTreeMap} = await import("./_import/components/makeTreeMap.c44e88a1.js");
+async function MakeTreemapData(fileAttachment) {
+  const data_l = await fileAttachment.csv({ typed: true });
+
+  const sortedData = data_l
+    .sort((a, b) => b.retweets - a.retweets); 
+
+  // Structure the hierarchical data
+  return {
+    name: "root",
+    children: d3
+      .groups(sortedData, (d) => d.name) // Group by full_name
+      .map(([name, tweets]) => ({
+        name: name, // Group name (full_name)
+        children: tweets.map((tweet) => ({
+          name: tweet.tweet, // Tweet text
+          value: +tweet.retweets // Size based on RT
+        }))
+      }))
+  };
+}
+
+// Usage
+const data = await MakeTreemapData(
+  FileAttachment("./data/tweets_top1000_rt.csv")
+);
+console.log(data);
+
+
+
+const svg = makeTreeMap(data, { width: 1400, height: 800, colorScheme: d3.schemeCategory10, tileMethod: d3.treemapSquarify, legendFontSize: 23, showText: false, metricName: 'Retweets' });
+
+display(svg);
+
+return {MakeTreemapData,data,makeTreeMap,svg};
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Twitter Analysis</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Statistics</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./01_tweet_times">Tweet Times</a></li>
+    <li class="observablehq-link"><a href="./02_friends_followers">Friends &amp; Followers</a></li>
+    <li class="observablehq-link"><a href="./03_likes_retweets">Likes &amp; Retweets</a></li>
+    <li class="observablehq-link"><a href="./04_hashtags">Hashtags</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./05_tweets">Tweets</a></li>
+    <li class="observablehq-link"><a href="./06_notebooks">Notebooks</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<style>
+  .tooltip {
+    font-size: inherit;  /* Use inherited size from inline style */
+}
+/* Chart Wrapper: Center charts and text */
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* Global Wrapper: Center all page content */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    margin: 0 auto; /* Center the wrapper itself */
+    max-width: 900px; /* Match the text dimensions */
+    padding: 20px; /* Add spacing around the edges */
+    box-sizing: border-box;
+}
+
+/* Text Container: Style the text block */
+.text-container {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 1200px;
+    line-height: 1.4;
+    font-size: 22px;
+    font-family: "Calibri", Arial, sans-serif;
+}
+
+.body{
+  max-width: 900px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+svg {
+    max-width: 100%; /* Ensure the SVG scales within its container */
+    height: auto;    /* Maintain aspect ratio */
+  }
+</style>
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Most Liked Tweets</h2>
+   <p>Donald Trump dominates the top most liked tweets, but Bernie Sanders has the single most liked tweet in the dataset. Guess who he adresses.</p>
+   <blockquote>
+   "President Trump, you made a big mistake. By trying to divide us up by race, religion, gender and nationality you actually brought us closer." – Bernie Sanders, January 21, 2017
+   </blockquote>
+   <p>Hover over the rectangles to see the actual tweet and number of likes.</p>
+  </div>
+</div>
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Top 1000 Most Liked Tweets</h2>
+  </div>
+</div>
+<div class="observablehq observablehq--block"><!--:433803c5:--></div>
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Top 1000 Most Retweeted Tweets</h2>
+  </div>
+</div>
+<div class="observablehq observablehq--block"><!--:6d691902:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./04_hashtags"><span>Hashtags</span></a><a rel="next" href="./06_notebooks"><span>Notebooks</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-04T17:39:01">Apr 4, 2025</a>.</div>
+</footer>
+</div>
+</body>
+</html>

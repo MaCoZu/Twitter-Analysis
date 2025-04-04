@@ -4,7 +4,13 @@ export default {
   title: "Twitter Analysis",
   root: "src",
   output: "dist",  // Make sure this matches your build process
-  exclude: ["_drafts/**/*", "_drafts/**", "_*.md"],
+  exclude: [
+    "_drafts/**/*",
+    "_drafts/**",
+    "_*.md",
+    "src/data/hash_count.csv", // Exclude the problematic file
+    "src/outtakes.md"              // Exclude the outtakes file
+  ],
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly

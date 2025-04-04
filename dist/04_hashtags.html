@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Hashtags | Twitter Analysis</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.e174b4b6.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.d397b6a8.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/84d7b8e9.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/2c0cdfa2.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/626bedc4.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/5851d7ef.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/dcd02767.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/f1db2593.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/034b7bcb.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/4bb53638.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/bbafde58.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/aa5b35a8.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/32c7fec2.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/567840a0.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/cf9b720b.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/5dcd62f4.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/f8e03c56.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/5bc129e1.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/19c92b44.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/1ee6c50d.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.e174b4b6.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
+
+registerFile("./data/hash_combinations.csv", {"name":"./data/hash_combinations.csv","mimeType":"text/csv","path":"./_file/data/hash_combinations.69286440.csv","lastModified":1734855948384,"size":2456});
+registerFile("./data/hash_top100.csv", {"name":"./data/hash_top100.csv","mimeType":"text/csv","path":"./_file/data/hash_top100.77cbabc2.csv","lastModified":1736165275993,"size":1259});
+
+define({id: "6d281b4b", inputs: ["Plot","d3"], outputs: ["FileAttachment","resize","data_hash","limitedData","hashPlot"], body: async (Plot,d3) => {
+const {FileAttachment, resize} = await import("./_observablehq/stdlib.95bfbf7e.js");
+
+const data_hash = await FileAttachment("./data/hash_top100.csv")
+  .csv({ typed: true })
+  .then(rawData => 
+    rawData
+      .map(d => ({
+        hashtag: d.hashtag,
+        count: +d.count // Ensure count is a number
+      }))
+      .sort((a, b) => b.count - a.count)
+  );
+
+
+  const limitedData = data_hash.slice(0, 20);
+  console.log(limitedData);
+  
+
+function hashPlot(data, { width, height = 600 }) {
+  const svg = Plot.plot({
+    style: {fontSize: "16px"},
+    marginLeft: 100,
+    marginBottom: 10,
+    x: { axis: null },
+    y: { label: ""},
+    color: { scheme: "YlOrRd" },
+    marks: [
+      // Bars
+      Plot.barX(data, {
+        x: "count",
+        y: "hashtag",
+        fill: "count",
+        sort: { y: "x", reverse: true }
+      }),
+      // Text labels
+      Plot.text(data, {
+        x: "count",
+        y: "hashtag",
+        text: (d) => d3.format(",")(d.count),
+        fill: (d) => (d.count > 7000 ? "white" : "black"),
+        textAnchor: "end",
+        dx: -8,
+        dy: 1
+      }),
+      Plot.ruleX([0])
+    ]
+  });
+
+  return svg;
+}
+
+return {FileAttachment,resize,data_hash,limitedData,hashPlot};
+}});
+
+define({id: "641f79d9", mode: "inline", inputs: ["hashPlot","limitedData","width","display"], body: async (hashPlot,limitedData,width,display) => {
+display(await(
+hashPlot(limitedData, { width })
+))
+}});
+
+define({id: "cf0cf500", inputs: ["FileAttachment","d3"], outputs: ["Inputs","htl","data_hashcombo","hash_table","sparkbar"], body: async (FileAttachment,d3) => {
+const [Inputs, htl] = await Promise.all([import("./_observablehq/stdlib/inputs.d397b6a8.js"), import("./_npm/htl@0.3.1/063eb405.js")]);
+
+// Load and parse the CSV file
+const data_hashcombo = await FileAttachment("./data/hash_combinations.csv")
+  .csv({ typed: true })
+  .then(rawData =>
+    rawData.map(d => ({
+      hash1: d.hash_1,
+      hash2: d.hash_2,
+      count_comb: +d.count,
+      count1: +d.hash_1_count
+    }))
+  );
+
+
+
+// Display a table with formatted bars for "count_comb"
+const hash_table = Inputs.table(data_hashcombo, {
+  select: false,
+  rows: 20,
+  sort: "count_comb", 
+  reverse: true,
+  columns: ["hash1", "hash2", "count_comb"], // Columns to display
+  header: {
+    hash1: "Hashtag 1",
+    hash2: "Hashtag 2",
+    count_comb: "Count Combination"
+  },
+  format: {
+    count_comb: sparkbar(d3.max(data_hashcombo, d => d.count_comb)) // Use a custom bar renderer
+  }
+});
+
+function sparkbar(max) {
+  return (x) => {
+    const isOutside = x < max * 0.3; 
+    return htl.html`
+      <div style="
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 24px; 
+      ">
+        <!-- Bar -->
+        <div style="
+          background: var(--theme-green); /* Bar color */
+          color: ${isOutside ? 'black' : 'white'}; /* Text color */
+          font: 10px/1.7 var(--sans-serif); /* Font styling */
+          width: ${100 * x / max}%; /* Bar width */
+          height: 100%; /* Fill parent container height */
+          padding: 2px 5px; /* Add padding for spacing */
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          justify-content: ${isOutside ? 'start' : 'end'}; 
+        ">
+          ${!isOutside ? x.toLocaleString("en-US") : ""}
+        </div>
+
+        <!-- Label Outside (conditionally rendered) -->
+        ${isOutside
+          ? htl.html`<span style="
+               position: absolute;
+              //  align-items: center;
+               padding: 2px 5px;
+               display: flex;
+               left: calc(${100 * x / max}% + 10px); 
+               top: 50%; /* Center vertically */
+               transform: translateY(-50%);
+               justify-content: 'start';
+               white-space: nowrap; /* Prevent text wrapping */
+               color: black; /* Label color */
+               font: 10px/1.7 var(--sans-serif);
+             ">
+             ${x.toLocaleString("en-US")}
+           </span>`
+          : ""}
+      </div>
+    `;
+  };
+}
+
+
+return {Inputs,htl,data_hashcombo,hash_table,sparkbar};
+}});
+
+define({id: "5290f277", mode: "inline", inputs: ["display","hash_table"], body: (display,hash_table) => {
+display(hash_table)
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Twitter Analysis</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Statistics</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./01_tweet_times">Tweet Times</a></li>
+    <li class="observablehq-link"><a href="./02_friends_followers">Friends &amp; Followers</a></li>
+    <li class="observablehq-link"><a href="./03_likes_retweets">Likes &amp; Retweets</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./04_hashtags">Hashtags</a></li>
+    <li class="observablehq-link"><a href="./05_tweets">Tweets</a></li>
+    <li class="observablehq-link"><a href="./06_notebooks">Notebooks</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<style>
+/* Chart Wrapper: Center charts and text */
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* Global Wrapper: Center all page content */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    margin: 0 auto; /* Center the wrapper itself */
+    max-width: 900px; /* Match the text dimensions */
+    padding: 20px; /* Add spacing around the edges */
+    box-sizing: border-box;
+}
+
+/* Text Container: Style the text block */
+.text-container {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 1200px;
+    line-height: 1.4;
+    font-size: 22px;
+    font-family: "Calibri", Arial, sans-serif;
+}
+
+.body{
+  max-width: 900px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+svg {
+    max-width: 100%; /* Ensure the SVG scales within its container */
+    height: auto;    /* Maintain aspect ratio */
+  }
+</style>
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Hashtags</h2>
+  <p>
+  There were 62001 of distinct hashtags in the dataset. Below you see the top 20 most used hashtags. Hashtags are often used in conjunction with other hashtags. The most used combinations are shown in the second plot. Hashtags also emerge, reappear and come out of fashion. Below you'll find the usage patterns of the top 10 hashtags over time.
+  </p>
+  </div>
+</div>
+<div class="observablehq observablehq--block"><!--:6d281b4b:--></div>
+<div class="chart-wrapper">
+  <observablehq-loading></observablehq-loading><!--:641f79d9:-->
+</div>
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Hashtags Combinations</h2>
+  <p>
+You may sort the columns by hashtag 1 to see for example how hashtag 1 was used in conjuction with other hashtags.
+  </p>
+  </div>
+</div>
+<div class="observablehq observablehq--block"><!--:cf0cf500:--></div>
+<div class="chart-wrapper">
+  <div class="text-container">
+<observablehq-loading></observablehq-loading><!--:5290f277:-->
+  </div>
+</div>
+<div class="chart-wrapper">
+  <div class="text-container">
+    <h2>Top 10 Hashtags over Time</h2>
+    <p>
+      Hashtags of interest can be tracked over time to gauge the importance of topics. Some hashtags pop up and vanish while others recur regularly. And then there are topics like jobs and business which are continuous burners. But the most references were made to the health care system, coded with "#ACA" and "#Obamacare". There is an alleged  connection between #smallbiz and the health care system. Some reading of the tweets suggests the Republicans accused the Democrats health care plans to hurt small businesses. 
+    </p>
+    <br>
+    <details>
+      <summary>Hashtag Explanations</summary>
+      <div class="details-text">
+        <p>
+          <strong>"Obamacare"</strong> is the same as <strong>"ACA"</strong> and means the Affordable Care Act. It helps 
+          to provide low-income households with affordable health insurance. This is apparently an important topic for Americans.
+        </p>
+        <p>
+          <strong>"TCOT"</strong> stands for Top Conservatives On Twitter and is a distinguishing mark for Republicans.
+        </p>
+        <p>
+          <strong>"SOTU"</strong> is the State of the Union Address, an <strong>annual</strong> message delivered by the 
+          president to a joint session of the US Congress.
+        </p>
+        <p>
+          The Supreme Court Of The United States, <strong>"SCOTUS"</strong>, is the highest court in the land and the 
+          final judge in matters of interpreting both the Constitution and all cases involving the laws passed by Congress. 
+          It has been said that the nomination and confirmation process has become highly politicized in the last few decades, 
+          with parties trying to get their Republican or Democratic-leaning judge into the court.
+        </p>
+        <p>
+          <strong>"UTPOL"</strong> is short for Utah politics but really refers to the 
+          <a href="https://www.nga.org/disagree-better/" target="_blank" rel="noopener noreferrer">"Disagree Better"</a> 
+          initiative of Utah governors to promote a less polarized political dialogue.
+        </p>
+        <p>
+          <strong>"MEPOLITICS"</strong>: Maine politics. Maine is a state in the northeast of the US with borders to Canada.
+        </p>
+      </div>
+    </details>
+  </div>
+</div>
+<div class="chart-wrapper">
+  <div class="text-container">
+<img src="./_file/img/top10_hash.ed58d841.png">
+  </div>
+</div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./03_likes_retweets"><span>Likes &amp; Retweets</span></a><a rel="next" href="./05_tweets"><span>Tweets</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-04T17:39:01">Apr 4, 2025</a>.</div>
+</footer>
+</div>
+</body>
+</html>
