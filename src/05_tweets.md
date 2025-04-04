@@ -1,9 +1,13 @@
 ---
 theme: dashboard
 title: Tweets
+toc: false
 ---
 
 <style>
+  .tooltip {
+    font-size: inherit;  /* Use inherited size from inline style */
+}
 /* Chart Wrapper: Center charts and text */
 .chart-wrapper {
     display: flex;
@@ -57,45 +61,47 @@ svg {
   </div>
 </div>
 
+<div class="chart-wrapper">
+  <div class="text-container">
+   <h2>Top 1000 Most Liked Tweets</h2>
+  </div>
+</div>
 
 ```js
-const liked_tweets = await FileAttachment("./data/tweets_top1000_likes.csv").csv({
-  typed: true
-})
 
-```
-
-```js
 async function MakeTreemapData(fileAttachment) {
   // Load and parse the data from the attachment
-  const data = await fileAttachment.csv({ typed: true });
+  const data_l = await fileAttachment.csv({ typed: true });
+
+  // Sort the flat data by likes (descending) and take the top 1000
+  const sortedData = data_l
+    .sort((a, b) => b.likes - a.likes) // Sort by likes descending
+    .slice(0, 1000);
 
   // Structure the hierarchical data
   return {
     name: "root",
     children: d3
-      .groups(data, (d) => d.full_name) // Group by full_name
-      .map(([full_name, text]) => ({
-        name: full_name, // Group name (full_name)
-        children: text.map((text) => ({
-          name: text.text, // Tweet text
-          value: +text.favorite_count // Size based on favorite_count
+      .groups(sortedData, (d) => d.name) // Group by full_name
+      .map(([name, tweets]) => ({
+        name: name, // Group name (full_name)
+        children: tweets.map((tweet) => ({
+          name: tweet.tweet, // Tweet text
+          value: +tweet.likes // Size based on likes
         }))
       }))
   };
 }
 
-// Usage Example
-const tree_data = await MakeTreemapData(
+// Usage
+const data = await MakeTreemapData(
   FileAttachment("./data/tweets_top1000_likes.csv")
-)
-```
+);
 
 
-```js
 import { makeTreeMap } from "./components/makeTreeMap.js";
 
-const svg = makeTreeMap(tree_data, { width: 800, height: 500, colorScheme: d3.schemeCategory10, tileMethod: d3.treemapSquarify });
+const svg = makeTreeMap(data, { width: 1400, height: 800, colorScheme: d3.schemeCategory10, tileMethod: d3.treemapSquarify, legendFontSize: 23, showText: false, metricName: 'Likes' });
 
 display(svg);
 
@@ -106,12 +112,46 @@ display(svg);
 
 <div class="chart-wrapper">
   <div class="text-container">
-   <h2>Most Retweeted Tweets</h2>
-  <p>
-
-  </p>
+   <h2>Top 1000 Most Retweeted Tweets</h2>
   </div>
 </div>
 
 
 
+```js
+
+async function MakeTreemapData(fileAttachment) {
+  const data_l = await fileAttachment.csv({ typed: true });
+
+  const sortedData = data_l
+    .sort((a, b) => b.retweets - a.retweets); 
+
+  // Structure the hierarchical data
+  return {
+    name: "root",
+    children: d3
+      .groups(sortedData, (d) => d.name) // Group by full_name
+      .map(([name, tweets]) => ({
+        name: name, // Group name (full_name)
+        children: tweets.map((tweet) => ({
+          name: tweet.tweet, // Tweet text
+          value: +tweet.retweets // Size based on RT
+        }))
+      }))
+  };
+}
+
+// Usage
+const data = await MakeTreemapData(
+  FileAttachment("./data/tweets_top1000_rt.csv")
+);
+console.log(data);
+
+
+import { makeTreeMap } from "./components/makeTreeMap.js";
+
+const svg = makeTreeMap(data, { width: 1400, height: 800, colorScheme: d3.schemeCategory10, tileMethod: d3.treemapSquarify, legendFontSize: 23, showText: false, metricName: 'Retweets' });
+
+display(svg);
+
+```

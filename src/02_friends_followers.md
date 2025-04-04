@@ -1,24 +1,28 @@
 ---
 theme: dashboard
 title: Friends & Followers
-toc: true
+toc: false
 ---
 
 <style>
 .chart-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the chart and text container horizontally */
-  margin: 0 auto; /* Center the wrapper itself */
-  max-width: 900px; /* Adjust line length */
-
+  align-items: center; 
+  max-width: 750px; 
+  justify-content: center; 
+  margin: 20px auto; 
+  text-align: center; 
 }
 
-.text-container {
-  text-align: left; /* Left-align the text */
-  margin: 20px auto; /* Increase side margins for better spacing */
-  max-width: 1200px; /* Increase this value for a longer text line */
-  line-height: 1.4; /* Improve readability */
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: left; 
+  margin: 20px auto; 
+  max-width: 750px; 
+  line-height: 1.4; 
   font-size: 22px;
   font-family: "Calibri", Arial, sans-serif;
 }
@@ -73,14 +77,12 @@ toc: true
 </style>
 
 
-<div class="chart-wrapper">
-  <div class="text-container">
+  <div class="text-wrapper">
   <h2>Friends & Followers</h2>
   <p>
   Some accounts have a pretty outsized followership, which skews the distribution of followers. For instance, Trump has often been criticized for having an army of bots supporting him. His two Twitter accounts break the mold in terms of followers while having few friends. Despite the presence of a substantial bot network — <a href="https://en.wikipedia.org/wiki/Trump%27s_network">numbering in the tens of thousands</a> —  Trump can't be ignored. He remains an influential figure and people around the world closely monitor his statements to gauge the American mood. Additionally, Trump ranks highest in terms of likes and retweets, which has to be taken with a grain of salt, considering the bots.
   </p>
   </div>
-</div>
 
 
 
@@ -128,6 +130,7 @@ function sparkbar(max) {
           display: flex;
           align-items: center;
           justify-content: ${isOutside ? 'start' : 'end'}; 
+          z-index: 0;
         ">
           ${!isOutside ? x.toLocaleString("en-US") : ""}
         </div>
@@ -157,20 +160,24 @@ function sparkbar(max) {
 
 
 ```
+
 <div class="chart-wrapper">
-  <div class="card">
+  <div class="card" style="padding: 0; z-index: 50;">
     ${display(table_ff)}
   </div>
 </div>
 
 
-
-<div class="chart-wrapper">
-  <div class="text-container">
+  <div class="text-wrapper">
   <h2>Distributions</h2>
   <p>
-  The average (mean) followership is 162,434 while the median is just a tenth of that 16,732. Suggesting a highly skewed distribution of followership and also friendships when outliers are included. Below the charts show follower and friendsds distributions without outliers. Without outliers the average friendships are 894 (median: 650) and for followers the mean is 18,179 (median: 14,061). You can have a look at the skewed data by switching to "With Outliers" on the drop down menus.
+  The average (mean) followership is 162,434 while the median is just a tenth of that 16,732. Suggesting a highly skewed distribution of followership. The mean of followership without outliers is 18,179 (median: 14,061).
   </p>
+  </div>
+
+<div class="chart-wrapper">
+  <div>
+    ${PlotFollowers(dataWithoutOutliers1)}
   </div>
 </div>
 
@@ -185,18 +192,19 @@ const lowerBound = q1 - 1.5 * iqr;
 const upperBound = q3 + 1.5 * iqr;
 
 // Filtered datasets
-const dataWithOutliers = data_ff; // Original data
-const dataWithoutOutliers = data_ff.filter(
+const dataWithOutliers1 = data_ff; // Original data
+const dataWithoutOutliers1 = data_ff.filter(
   d => d.followers_count >= lowerBound && d.followers_count <= upperBound
 );
 
+
 // Create the histogram function
-function PlotFollowers(selectedData) {
+function PlotFollowers(data1) {
   return Plot.plot({
     marginBottom: 60,
     marginTop: 40,
     marginLeft: 60,
-    title: `Distribution of Followers (${dropdown.value})`,
+    title: `Distribution of Followers (without outlier)`,
         x: { 
         padding: 0.05,
         label: "Follower Count",
@@ -209,7 +217,7 @@ function PlotFollowers(selectedData) {
         },
     y: { 
         grid: true, 
-        label: "Frequency",
+        label: "",
         lablelOffset: 40,  
         labelAnchor: "center", 
         grid: true,   // Show horizontal gridlines
@@ -217,48 +225,22 @@ function PlotFollowers(selectedData) {
         tickSize: 0,  // Remove tick lines if grid is enabled
         },
      marks: [
-       Plot.rectY(selectedData, Plot.binX({y: "count"}, {x: "followers_count", padding: 0.2, fill: "steelblue"}),
+       Plot.rectY(data1, Plot.binX({y: "count"}, {x: "followers_count", padding: 0.2, fill: "steelblue"}),
        ),
     Plot.ruleY([0])
   ],
   });
 }
-
-
-// Create dropdown and dynamic rendering logic
-const container = document.createElement("div"); // Container for the dropdown and chart
-const dropdown = Inputs.select(["With Outliers", "Without Outliers"], {
-  label: "Filter outliers:",
-  value: "Without Outliers"
-});
-container.appendChild(dropdown);
-
-const chartDiv = document.createElement("div"); // Container for the chart
-container.appendChild(chartDiv);
-
-// Function to update the chart dynamically
-function updateChart() {
-  const selectedData = dropdown.value === "With Outliers" 
-    ? dataWithOutliers 
-    : dataWithoutOutliers;
-
-  // Clear the previous chart
-  chartDiv.innerHTML = "";
-
-  // Render the updated chart
-  chartDiv.appendChild(PlotFollowers(selectedData));
-}
-
-// Add event listener to update the chart when the dropdown changes
-dropdown.addEventListener("input", updateChart);
-
-// Initial render
-updateChart();
-
-// Display the container
-display(container);
-
 ```
+
+ <div class="text-wrapper">
+  <h2>Distributions</h2>
+  <p>
+  Average friendships without outliers are 894 (median: 650) you can can see the sek by switching to 'with outliers'.
+  </p>
+  </div>
+
+ <div class="text-wrapper">
 
 ```js
 
@@ -279,12 +261,12 @@ const dataWithoutOutliers = data_ff.filter(
 );
 
 // Create the histogram function
-function HistogramPlot(selectedData) {
+function HistogramPlot(data2) {
   return Plot.plot({
     marginBottom: 60,
     marginTop: 40,
     marginLeft: 60,
-    title: `Distribution of Friends (${dropdown.value})`,
+    title: `Distribution of Friends (${dropdown2.value})`,
         x: { 
         padding: 0.05,
         label: "Friends Count",
@@ -305,7 +287,7 @@ function HistogramPlot(selectedData) {
         tickSize: 0,  // Remove tick lines if grid is enabled
         },
     marks: [
-      Plot.rectY(selectedData, Plot.binX({y: "count"}, {x: "friends_count", padding: 0.2, fill: "steelblue"})),
+      Plot.rectY(data2, Plot.binX({y: "count"}, {x: "friends_count", padding: 0.2, fill: "steelblue"})),
       Plot.ruleY([0])
     ]
   });
@@ -313,18 +295,18 @@ function HistogramPlot(selectedData) {
 
 // Create dropdown and dynamic rendering logic
 const container = document.createElement("div"); // Container for the dropdown and chart
-const dropdown = Inputs.select(["With Outliers", "Without Outliers"], {
+const dropdown2 = Inputs.select(["With Outliers", "Without Outliers"], {
   label: "Filter outliers:",
   value: "Without Outliers"
 });
-container.appendChild(dropdown);
+container.appendChild(dropdown2);
 
 const chartDiv = document.createElement("div"); // Container for the chart
 container.appendChild(chartDiv);
 
 // Function to update the chart dynamically
 function updateChart() {
-  const selectedData = dropdown.value === "With Outliers" 
+  const selectedData2 = dropdown2.value === "With Outliers" 
     ? dataWithOutliers 
     : dataWithoutOutliers;
 
@@ -332,18 +314,17 @@ function updateChart() {
   chartDiv.innerHTML = "";
 
   // Render the updated chart
-  chartDiv.appendChild(HistogramPlot(selectedData));
+  chartDiv.appendChild(HistogramPlot(selectedData2));
 }
 
 // Add event listener to update the chart when the dropdown changes
-dropdown.addEventListener("input", updateChart);
+dropdown2.addEventListener("input", updateChart);
 
 // Initial render
 updateChart();
-
-// Display the container
 display(container);
+
 ```
 
-
+ </div>
 

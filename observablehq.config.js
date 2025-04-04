@@ -16,6 +16,7 @@ export default {
         { name: "Likes & Retweets", path: "/03_likes_retweets" },
         { name: "Hashtags", path: "/04_hashtags" },
         { name: "Tweets", path: "/05_tweets" },
+        { name: "Network", path: "/06_network_nodes" },
         { name: "Notebooks", path: "/10_notebooks" },
       ]
     }

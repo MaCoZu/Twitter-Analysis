@@ -1,6 +1,8 @@
 ---
 theme: dashboard
 title: Likes & Retweets
+toc: false
+
 ---
 
 <style>
@@ -10,7 +12,6 @@ title: Likes & Retweets
   align-items: center; /* Centers the chart and text container horizontally */
   margin: 40px auto; /* Center the wrapper itself */
   max-width: 900px; /* Adjust line length */
-
 }
 
 .text-container {
@@ -23,20 +24,20 @@ title: Likes & Retweets
 }
 
 
-    .plot-title {
-    font-size: 28px;        /* Larger title font size */
-    font-weight: bold;      /* Bold text */
-    color: darkblue;        /* Title color */
-    text-align: center;     /* Center the title */
-    font-family: "Georgia", serif; /* Custom font family */
-    margin-bottom: 20px;    /* Add spacing below the title */
-    text-transform: uppercase; /* Uppercase letters */
-    letter-spacing: 1px;    /* Spacing between letters */
-    text-align: center;   /* Center the title */
-    font-size: 28px;      /* Increase the font size */
-    font-weight: bold;    /* Bold title */
-    font-family: "Arial, sans-serif"; /* Custom font */
-    margin-top: 20px;     /* Add spacing above */
+.plot-title {
+  font-size: 28px;        /* Larger title font size */
+  font-weight: bold;      /* Bold text */
+  color: darkblue;        /* Title color */
+  text-align: center;     /* Center the title */
+  font-family: "Georgia", serif; /* Custom font family */
+  margin-bottom: 20px;    /* Add spacing below the title */
+  text-transform: uppercase; /* Uppercase letters */
+  letter-spacing: 1px;    /* Spacing between letters */
+  text-align: center;   /* Center the title */
+  font-size: 28px;      /* Increase the font size */
+  font-weight: bold;    /* Bold title */
+  font-family: "Arial, sans-serif"; /* Custom font */
+  margin-top: 20px;     /* Add spacing above */
   }
 
   /* Default (Light Mode) */
@@ -72,6 +73,7 @@ title: Likes & Retweets
 </style>
 
 
+
 <div class="chart-wrapper">
   <div class="text-container">
   <h2>Likes & Retweets</h2>
@@ -81,12 +83,25 @@ title: Likes & Retweets
   </div>
 </div>
 
-```js
-const data_flrt = await FileAttachment("./data/follower_likes_rt.csv").csv({ typed: true });
-```
 
 ```js
-const table_avg_likes = Inputs.table(data_flrt, {
+const data_flrt = await FileAttachment("./data/follower_likes_rt.csv").csv({ typed: true });
+const search = Inputs.search(data_flrt, {label: "Search names", placeholder: "Name…", datalist: ["names"],});
+const filteredData = Generators.input(search);
+```
+
+
+<div class="chart-wrapper">
+  <!-- Chart -->
+  <div class="card" >
+    <div style="margin: 0px 10px 10px 10px">${search}</div>
+    <div>${table_avg_likes}</div>
+  </div>
+</div>
+
+
+```js
+const table_avg_likes = Inputs.table(filteredData, {
   columns: ["name", "fav_avg", "rt_avg"],
   header: {
     name: "Name",
@@ -94,8 +109,8 @@ const table_avg_likes = Inputs.table(data_flrt, {
     rt_avg: "Average Retweets"
   },
   format: {
-    fav_avg: sparkbar(d3.max(data_flrt, d => d.fav_avg)),
-    rt_avg: sparkbar(d3.max(data_flrt, d => d.rt_avg))
+    fav_avg: sparkbar(d3.max(filteredData, d => d.fav_avg)),
+    rt_avg: sparkbar(d3.max(filteredData, d => d.rt_avg))
   },
   rows: 20,
   select: false,
@@ -151,10 +166,5 @@ function sparkbar(max) {
 }
 ```
 
-<div class="chart-wrapper">
-  <div class="card">
-    ${display(table_avg_likes)}
-</div>
-</div>
 
 

@@ -1,7 +1,7 @@
 ---
 theme: dashboard
 title: Hashtags
-toc: true
+toc: false
 ---
 
 <style>
@@ -51,14 +51,15 @@ svg {
   <div class="text-container">
    <h2>Hashtags</h2>
   <p>
-  There were 79710 of distinct hashtags in the dataset. Below you see the top 20 most used hashtags. Hashtags are often used in conjunction with other hashtags. The most used combinations are shown in the second plot. Hashtags are used differently over time. Below you'll find the usage patterns of the top 10 hashtags over time.
+  There were 62001 of distinct hashtags in the dataset. Below you see the top 20 most used hashtags. Hashtags are often used in conjunction with other hashtags. The most used combinations are shown in the second plot. Hashtags also emerge, reappear and come out of fashion. Below you'll find the usage patterns of the top 10 hashtags over time.
   </p>
   </div>
 </div>
 
-
 ```js
-const data_hash = await FileAttachment("./data/hash_count.csv")
+import {FileAttachment, resize} from "observablehq:stdlib";
+
+const data_hash = await FileAttachment("./data/hash_top100.csv")
   .csv({ typed: true })
   .then(rawData => 
     rawData
@@ -66,48 +67,51 @@ const data_hash = await FileAttachment("./data/hash_count.csv")
         hashtag: d.hashtag,
         count: +d.count // Ensure count is a number
       }))
-      .sort((a, b) => b.count - a.count) 
-      .slice(0, 20) // Take the top 50 rows
+      .sort((a, b) => b.count - a.count)
   );
-```
 
 
-```js
-function hashPlot(data, {width}) {
-  return Plot.plot({
-    marginLeft: 140,
+  const limitedData = data_hash.slice(0, 20);
+  console.log(limitedData);
+  
+
+function hashPlot(data, { width, height = 600 }) {
+  const svg = Plot.plot({
+    style: {fontSize: "16px"},
+    marginLeft: 100,
     marginBottom: 10,
-    x: {
-      axis: null,
-    },
-    y: { label: "" },
+    x: { axis: null },
+    y: { label: ""},
     color: { scheme: "YlOrRd" },
     marks: [
+      // Bars
       Plot.barX(data, {
         x: "count",
         y: "hashtag",
         fill: "count",
         sort: { y: "x", reverse: true }
       }),
-      // Add count labels inside the bars
+      // Text labels
       Plot.text(data, {
-        x: "count", // Align the text position based on count
-        y: "hashtag", // Align text to the y-axis
-        text: (d) => d3.format(",")(d.count), // Format count as text with commas
-        fill: (d) => (d.count > 7000 ? "white" : "black"), // Set text color to white for visibility
-        fontSize: 7,
-        textAnchor: "end", // Align text to the end of the bar
-        dx: -6, // Adjust text position slightly inside the bar
-        dy: 4,
+        x: "count",
+        y: "hashtag",
+        text: (d) => d3.format(",")(d.count),
+        fill: (d) => (d.count > 7000 ? "white" : "black"),
+        textAnchor: "end",
+        dx: -8,
+        dy: 1
       }),
       Plot.ruleX([0])
     ]
-  })}
+  });
+
+  return svg;
+}
 
 ```
 
-<div class="card">
-  ${resize((width) => hashPlot(data_hash, { width }))}
+<div class="chart-wrapper">
+  ${hashPlot(limitedData, { width })}
 </div>
 
 
@@ -137,9 +141,7 @@ const data_hashcombo = await FileAttachment("./data/hash_combinations.csv")
     }))
   );
 
-```
 
-```js
 
 // Display a table with formatted bars for "count_comb"
 const hash_table = Inputs.table(data_hashcombo, {
@@ -222,9 +224,7 @@ ${display(hash_table)}
   <div class="text-container">
     <h2>Top 10 Hashtags over Time</h2>
     <p>
-      Hashtags of interest can be tracked over time to gauge the importance of topics. Some hashtags pop up and vanish 
-      while others recur regularly. And then there are topics like jobs and business which are continuous burners. But 
-      the most references were made to the health care system, coded with "#ACA" and "#Obamacare". There is an alleged  connection between #smallbiz and the health care system. Some reading of the tweets suggests the Republicans accused the Democrats health care plans to hurt small businesses. 
+      Hashtags of interest can be tracked over time to gauge the importance of topics. Some hashtags pop up and vanish while others recur regularly. And then there are topics like jobs and business which are continuous burners. But the most references were made to the health care system, coded with "#ACA" and "#Obamacare". There is an alleged  connection between #smallbiz and the health care system. Some reading of the tweets suggests the Republicans accused the Democrats health care plans to hurt small businesses. 
     </p>
     <br>
     <details>

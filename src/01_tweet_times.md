@@ -1,7 +1,8 @@
 ---
 theme: dashboard
 title: Tweet Times
-toc: true
+toc: false
+style: custom-style.css
 ---
 
 <style>
@@ -9,9 +10,10 @@ toc: true
   display: flex;
   flex-direction: column;
   align-items: center; 
-  margin: 0 auto; 
-  max-width: 900px; 
-
+  max-width: 750px; 
+  justify-content: center; /* Center horizontally */
+  margin: 20px auto; /* Center the container within the page and add spacing */
+  text-align: center; /* Match the alignment with text */
 }
 
 .text-container {
@@ -23,21 +25,22 @@ toc: true
   font-family: "Calibri", Arial, sans-serif;
 }
 
-    .plot-title {
-    font-size: 28px;        /* Larger title font size */
-    font-weight: bold;      /* Bold text */
-    color: darkblue;        /* Title color */
-    text-align: center;     /* Center the title */
-    font-family: "Georgia", serif; /* Custom font family */
-    margin-bottom: 20px;    /* Add spacing below the title */
-    text-transform: uppercase; /* Uppercase letters */
-    letter-spacing: 1px;    /* Spacing between letters */
-    text-align: center;   /* Center the title */
-    font-size: 28px;      /* Increase the font size */
-    font-weight: bold;    /* Bold title */
-    font-family: "Arial, sans-serif"; /* Custom font */
-    margin-top: 20px;     /* Add spacing above */
-  }
+
+.plot-title {
+  font-size: 28px;        /* Larger title font size */
+  font-weight: bold;      /* Bold text */
+  color: darkblue;        /* Title color */
+  text-align: center;     /* Center the title */
+  font-family: "Georgia", serif; /* Custom font family */
+  margin-bottom: 20px;    /* Add spacing below the title */
+  text-transform: uppercase; /* Uppercase letters */
+  letter-spacing: 1px;    /* Spacing between letters */
+  text-align: center;   /* Center the title */
+  font-size: 28px;      /* Increase the font size */
+  font-weight: bold;    /* Bold title */
+  font-family: "Arial, sans-serif"; /* Custom font */
+  margin-top: 20px;     /* Add spacing above */
+}
 
   /* Default (Light Mode) */
   .chart-title, .chart-legend {
@@ -131,8 +134,6 @@ const data_ym = await FileAttachment("./data/times_ym.csv")
   </div>
 </div>
 
-
-
 <!-- MonthlyPlot -->
 ```js
 
@@ -179,65 +180,121 @@ function MonthlyPlot(data, {width} = {}) {
 <!-- DailyPlot  -->
 ```js
 const data_daily = await FileAttachment("./data/times_daily.csv").csv({ typed: true }) 
+const weekdayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-function DailyPlot(data, {width}) {
-  const weekdayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
+function DailyPlot(data) {
   return Plot.plot({
-  title: "Average Daily Tweets",
-  marginLeft: 60,
-  marginBottom: 40,
-  x: {
-    domain: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ], // Correct order
-    label: "",
-    tickSize: 0,
-    tickPadding: 20, // Remove x-axis label
-    tickFormat: (day) => day.slice(0, 3) 
-  },
-  y: {
-    label: "", // Remove y-axis label
-    ticks: 3, // Number of ticks
-    tickSize: 0,
+    title: "Average Daily Tweets",
+    marginLeft: 60,
+    marginBottom: 40,
+    x: {
+      domain: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ], // Correct order
+      label: "",
+      tickSize: 0,
+      tickPadding: 20, // Remove x-axis label
+      tickFormat: (day) => day.slice(0, 3) 
+    },
+    y: {
+      label: "", // Remove y-axis label
+      ticks: 3, // Number of ticks
+      tickSize: 0,
 
-  },
-  color: {
-    type: "diverging",
-    scheme: "GnBu"
-  },
-  marks: [
-    Plot.barY(data_daily, {
-      x: "day", // Use "day" for x-axis
-      y: "avg_count", // Use "avg_daily_tweets" for y-axis
-      fill: "avg_count", // Map fill to "avg_daily_tweets" for coloring
-         title: (d) => {
-          const format = d3.format(",.0f"); // Format as a whole number with commas for thousands
-          return `${d.day}\n${format(d.avg_count)} Tweets`;}
-    }),
-    Plot.ruleY([0]) // Add a baseline at y = 0
-  ]
-})}
+    },
+    color: {
+      type: "diverging",
+      scheme: "GnBu"
+    },
+    marks: [
+      Plot.barY(data_daily, {
+        x: "day", // Use "day" for x-axis
+        y: "avg_count", // Use "avg_daily_tweets" for y-axis
+        fill: "avg_count", // Map fill to "avg_daily_tweets" for coloring
+          title: (d) => {
+            const format = d3.format(",.0f"); // Format as a whole number with commas for thousands
+            return `${d.day}\n${format(d.avg_count)} Tweets`;}
+      }),
+      Plot.ruleY([0]) // Add a baseline at y = 0
+    ]
+  })};
 ```
 
 <div class="grid grid-cols-2">
-  <div class="card">
-    ${resize((width) => MonthlyPlot(tweetData, {width}))}
+  <div class="chart-wrapper" style="max-width: 98%">
+    ${MonthlyPlot(tweetData)}
   </div>
-  <div class="card">
-    ${resize((width) => DailyPlot(data_daily, {width}))}
+  <div class="chart-wrapper" style="max-width: 98%">
+    ${DailyPlot(data_daily)}
   </div>
 </div>
 
 
+<div class="chart-wrapper">
+  <div class="text-container">
+  <p>
+  Twitter activity gets going around lunch time and in our observed circle of politicians, there is an average of 36 tweets per hour between 3pm and 8pm. If we suppose that politican get up at 7am, there is not much tweeting in the mornings, they seem to wait for the golden twitter hour or the topic of the day to throw in their two cents.
+  </p>
+  </div>
+</div>
+
+<div class="chart-wrapper" style="">
+${HourlyPlot(data_hourly)}
+</div>
 
 
+<!-- Hourly Plot -->
+```js
+const data_hourly = await FileAttachment("./data/time_hourly.csv")
+  .csv({ typed: true })
+  .then(rawData => 
+    rawData
+  .map((d) => ({
+    avg_hourly_tweets: +d.avg_hourly_tweets,
+    hour: d.hour === 0 ? 24 : d.hour 
+  }))
+  .sort((a, b) => a.hour - b.hour) );
 
+function HourlyPlot(data) {
+  return Plot.plot({
+    title: "Average Hourly Tweets",
+    marginLeft: 60,
+    marginBottom: 40,
+    width:750,
+    x: {
+      label: "",
+      tickSize: 0,
+      tickPadding: 20,
+      domain: d3.range(1, 25)
+    },
+    y: {
+      label: "", // Remove y-axis label
+      ticks: 3, // Number of ticks
+      tickSize: 0
+    },
+    color: {
+      type: "diverging",
+      scheme: "GnBu"
+    },
+    marks: [
+      Plot.barY(data, {
+        x: "hour", // Use "day" for x-axis
+        y: "avg_hourly_tweets",
+        fill: "avg_hourly_tweets",
+        title: (d) => {
+          const format = d3.format(",.0f");
+          return `${format(d.avg_hourly_tweets)} Tweets`;
+        }
+      }),
+      Plot.ruleY([0]) // Add a baseline at y = 0
+    ]
+  })};
+```
 
 
