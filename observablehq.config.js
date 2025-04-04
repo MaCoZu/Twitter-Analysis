@@ -2,7 +2,9 @@
 export default {
   // The app’s title; used in the sidebar and webpage titles.
   title: "Twitter Analysis",
-  exclude: ["_drafts/**/*", "_drafts/**", "_*.md"], 
+  root: "src",
+  output: "dist",  // Make sure this matches your build process
+  exclude: ["_drafts/**/*", "_drafts/**", "_*.md"],
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
@@ -16,8 +18,8 @@ export default {
         { name: "Likes & Retweets", path: "/03_likes_retweets" },
         { name: "Hashtags", path: "/04_hashtags" },
         { name: "Tweets", path: "/05_tweets" },
-        { name: "Network", path: "/06_network_nodes" },
-        { name: "Notebooks", path: "/10_notebooks" },
+        // { name: "Network", path: "/06_network_nodes" },
+        { name: "Notebooks", path: "/06_notebooks" },
       ]
     }
   ],

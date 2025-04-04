@@ -16,6 +16,22 @@ Then visit <http://localhost:3000> to preview your app.
 
 For more, see <https://observablehq.com/framework/getting-started>.
 
+
+To build your app with npm, run:
+
+`npm run build`
+
+To preview your built app locally, you can use a local static HTTP server such as http-server:
+
+`npx http-server dist`
+
+
+
+
+To update your app’s dependencies — in particular when a new release of Framework is available, cd into the project and run:
+
+`npm update`
+
 ## Project structure
 
 A typical Framework project looks like this:

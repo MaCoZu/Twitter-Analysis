@@ -1,5 +1,20 @@
 {
-  "rewrites": [{"source": "/(.*)", "destination": "/index.html"}],
-  "outputDirectory": "dist",
-  "cleanUrls": true
+  "builds": [
+    {
+      "src": "src/**",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/dist/$1"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
