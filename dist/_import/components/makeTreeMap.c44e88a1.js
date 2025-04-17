@@ -1,4 +1,4 @@
-import * as d3 from "../../_npm/d3@7.9.0/7055d4c5.js";
+import * as d3 from "../../_npm/d3@7.9.0/e780feca.js";
 
 export function makeTreeMap(data, options = {}) {
     const {
