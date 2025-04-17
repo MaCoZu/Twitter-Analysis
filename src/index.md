@@ -25,6 +25,11 @@ toc: false
   font-size: 30px;
   font-weight: 700;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  
+  font-family: "Calibri", Arial, sans-serif;
+}
 </style>
 
 <h1>Congressional Tweeting</h1>
