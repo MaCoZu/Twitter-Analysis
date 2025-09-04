@@ -4,5 +4,4 @@ node_modules/
 yarn-error.log
 _drafts
 src/outtakes.md
-src/data
-_*
+_vercel.json
