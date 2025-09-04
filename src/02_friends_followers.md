@@ -1,7 +1,7 @@
 ---
-theme: dashboard
 title: Friends & Followers
 toc: false
+style: custom-style.css
 ---
 
 <style>
@@ -10,39 +10,36 @@ toc: false
   flex-direction: column;
   align-items: center; 
   max-width: 750px; 
-  justify-content: center; 
-  margin: 20px auto; 
-  text-align: center; 
+  justify-content: center; /* Center horizontally */
+  margin: 20px auto; /* Center the container within the page and add spacing */
+  text-align: center; /* Match the alignment with text */
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
+.text-container {
   text-align: left; 
   margin: 20px auto; 
-  max-width: 750px; 
+  max-width: 1200px; 
   line-height: 1.4; 
   font-size: 22px;
   font-family: "Calibri", Arial, sans-serif;
 }
 
 
-    .plot-title {
-    font-size: 28px;        /* Larger title font size */
-    font-weight: bold;      /* Bold text */
-    color: darkblue;        /* Title color */
-    text-align: center;     /* Center the title */
-    font-family: "Georgia", serif; /* Custom font family */
-    margin-bottom: 20px;    /* Add spacing below the title */
-    text-transform: uppercase; /* Uppercase letters */
-    letter-spacing: 1px;    /* Spacing between letters */
-    text-align: center;   /* Center the title */
-    font-size: 28px;      /* Increase the font size */
-    font-weight: bold;    /* Bold title */
-    font-family: "Arial, sans-serif"; /* Custom font */
-    margin-top: 20px;     /* Add spacing above */
-  }
+.plot-title {
+  font-size: 28px;        /* Larger title font size */
+  font-weight: bold;      /* Bold text */
+  color: darkblue;        /* Title color */
+  text-align: center;     /* Center the title */
+  font-family: "Georgia", serif; /* Custom font family */
+  margin-bottom: 20px;    /* Add spacing below the title */
+  text-transform: uppercase; /* Uppercase letters */
+  letter-spacing: 1px;    /* Spacing between letters */
+  text-align: center;   /* Center the title */
+  font-size: 28px;      /* Increase the font size */
+  font-weight: bold;    /* Bold title */
+  font-family: "Arial, sans-serif"; /* Custom font */
+  margin-top: 20px;     /* Add spacing above */
+}
 
   /* Default (Light Mode) */
   .chart-title, .chart-legend {
@@ -77,18 +74,21 @@ toc: false
 </style>
 
 
-  <div class="text-wrapper">
+<div class="chart-wrapper">
+  <div class="text-container">
   <h2>Friends & Followers</h2>
-  <p>
-  Some accounts have a pretty outsized followership, which skews the distribution of followers. For instance, Trump has often been criticized for having an army of bots supporting him. His two Twitter accounts break the mold in terms of followers while having few friends. Despite the presence of a substantial bot network — <a href="https://en.wikipedia.org/wiki/Trump%27s_network">numbering in the tens of thousands</a> —  Trump can't be ignored. He remains an influential figure and people around the world closely monitor his statements to gauge the American mood. Additionally, Trump ranks highest in terms of likes and retweets, which has to be taken with a grain of salt, considering the bots.
-  </p>
+    <p>
+    Some accounts have a pretty outsized followership, which skews the distribution of followers. For instance, Trump has often been criticized for having an army of bots supporting him. His two Twitter accounts break the mold in terms of followers while having few friends. Despite the presence of a substantial bot network — <a href="https://en.wikipedia.org/wiki/Trump%27s_network">numbering in the tens of thousands</a> —  Trump can't be ignored. He remains an influential figure and people around the world closely monitor his statements to gauge the American mood. Additionally, Trump ranks highest in terms of likes and retweets, which has to be taken with a grain of salt, considering the bots.
+    </p>
   </div>
+</div>
 
 
 
 ```js
 const data_ff = await FileAttachment("./data/follower_friends.csv").csv({ typed: true });
 ```
+
 
 ```js
 const table_ff = Inputs.table(data_ff, {
@@ -168,11 +168,13 @@ function sparkbar(max) {
 </div>
 
 
-  <div class="text-wrapper">
+<div class="chart-wrapper">
+  <div class="text-container">
   <h2>Distributions</h2>
   <p>
   The average (mean) followership is 162,434 while the median is just a tenth of that 16,732. Suggesting a highly skewed distribution of followership. The mean of followership without outliers is 18,179 (median: 14,061).
   </p>
+  </div>
   </div>
 
 <div class="chart-wrapper">
@@ -233,12 +235,11 @@ function PlotFollowers(data1) {
 }
 ```
 
- <div class="text-wrapper">
-  <h2>Distributions</h2>
+<div class="chart-wrapper">
+  <div class="text-container">
   <p>
   Average friendships without outliers are 894 (median: 650) you can can see the sek by switching to 'with outliers'.
   </p>
-  </div>
 
  <div class="text-wrapper">
 
@@ -325,6 +326,6 @@ updateChart();
 display(container);
 
 ```
-
+  </div>
  </div>
 

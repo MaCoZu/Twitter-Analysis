@@ -1,5 +1,6 @@
 ---
 draft: true
+style: custom-style.css
 ---
 <style>
 .tooltip {

@@ -1,7 +1,7 @@
 ---
-theme: dashboard
 title: Tweets
 toc: false
+style: custom-style.css
 ---
 
 <style>
@@ -67,6 +67,8 @@ svg {
   </div>
 </div>
 
+<div class="w-4/5 margin-auto">
+
 ```js
 
 async function MakeTreemapData(fileAttachment) {
@@ -107,6 +109,7 @@ display(svg);
 
 ```
 
+</div>
 
 
 

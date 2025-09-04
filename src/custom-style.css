@@ -1,7 +1,85 @@
 @import url("observablehq:default.css");
-@import url("observablehq:theme-air.css");
 
 :root {
-    /* --theme-foreground-focus: rgb(124, 9, 124); */
+    color-scheme: light;
+    --text-color: black;
     --theme-foreground-focus: rgb(8, 103, 25);
+    --card-border-color: #e5e7eb;
+    --card-radius: 8px;
+    --card-padding: 16px;
 }
+
+html, body { background: #ffffff; color: #111111; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Calibri", Arial, sans-serif;
+}
+
+body, .body {
+  font-family: "Calibri", Arial, sans-serif;
+}
+
+.text-container {
+  text-align: left;
+  margin: 20px auto;
+  max-width: 1200px;
+  line-height: 1.4;
+  font-size: 20px;
+  font-family: "Calibri", Arial, sans-serif;
+}
+
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Cards */
+.card {
+  padding: var(--card-padding);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--card-radius);
+  background: var(--theme-background); 
+}
+
+.card.hover-effect:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Center any direct child content (SVG, canvas, tables) inside chart-wrapper */
+.chart-wrapper > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chart-wrapper svg,
+.chart-wrapper canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Utility: center any block */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure chart titles/legends are visible in both themes */
+.chart-title, .chart-legend, svg text { fill: var(--text-color, black); }
+
+/* Observable Plot defaults */
+.plot .legend, .plot .legend text, .plot .tick text, .plot text.title, .plot text.subtitle {
+  fill: var(--text-color, black);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root { --text-color: white; }
+} */

@@ -1,8 +1,7 @@
 ---
-theme: dashboard
 title: Likes & Retweets
 toc: false
-
+style: custom-style.css
 ---
 
 <style>
@@ -71,9 +70,6 @@ toc: false
     overflow-x: auto; /* Allow horizontal scroll */
   }
 </style>
-
-
-
 <div class="chart-wrapper">
   <div class="text-container">
   <h2>Likes & Retweets</h2>

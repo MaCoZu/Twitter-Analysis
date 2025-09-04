@@ -1,7 +1,7 @@
 ---
-theme: dashboard
 title: Hashtags
 toc: false
+style: custom-style.css
 ---
 
 <style>

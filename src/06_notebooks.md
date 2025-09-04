@@ -1,7 +1,7 @@
 ---
-theme: dashboard
 title: Notebooks
 toc: false
+style: custom-style.css
 ---
 
 

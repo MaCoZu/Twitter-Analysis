@@ -1,5 +1,4 @@
 ---
-theme: [cotton, wide]
 title: Overview
 toc: false
 ---

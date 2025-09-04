@@ -1,5 +1,4 @@
 ---
-theme: dashboard
 title: Tweet Times
 toc: false
 style: custom-style.css
