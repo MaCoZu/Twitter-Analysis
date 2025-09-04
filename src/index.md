@@ -1,6 +1,7 @@
 ---
 title: Overview
 toc: false
+style: custom-style.css
 ---
 
 <style>
@@ -60,23 +61,22 @@ h1, h2, h3, h4, h5, h6 {
 <div class="chart-wrapper">
   <h3>Likes and Retweets</h3>
   <div class="card" style="padding: 20px 0px 0 0; margin-top: 20px;">
-    <div style="overflow-y: auto; max-height: 400px;">
-    <div style="margin: 5px 10px 10px 10px;">
-      ${search}
-    </div>
-      ${table_avg_likes}
-    </div>
+      <div style="margin: 0px 10px 10px 10px">
+      ${search}</div>
+      <div>${table_avg_likes}</div>
   </div>
 </div>
 
 
-  <div class="chart-wrapper">
-    <h3>Top Hashtags</h3>
-    <div class="card " style="padding: 20px 50px 0 0; margin-top: 20px; overflow-y: auto; max-height: 400px;">
+<div class="chart-wrapper">
+  <h3>Top Hashtags</h3>
+    <div class="card " style="padding: 20px 50px 0 0; margin-top: 20px; overflow-y: auto; max-height: 500px;">
       ${display(hashPlot(data_hash, {width}))}
     </div>
   </div>
 </div>
+</div>
+
 
 <h3 style="padding: 20px 0 0px 0; margin: auto; width: 100%; text-align: center;">Tweeting Times</h3>
 

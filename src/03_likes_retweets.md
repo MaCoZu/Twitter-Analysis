@@ -47,7 +47,7 @@ style: custom-style.css
   /* Dark Mode */
   @media (prefers-color-scheme: dark) {
     .chart-title, .chart-legend {
-      fill: white; /* Title and legend text in white */
+      fill: white;
     }
   }
 

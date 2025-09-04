@@ -32,10 +32,9 @@ body, .body {
 .chart-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin: 20px auto;
   justify-content: center;
-  text-align: center;
 }
 
 /* Cards */
@@ -53,10 +52,7 @@ body, .body {
 }
 
 /* Center any direct child content (SVG, canvas, tables) inside chart-wrapper */
-.chart-wrapper > * {
-  margin-left: auto;
-  margin-right: auto;
-}
+.chart-wrapper > * { width: 100%; }
 
 .chart-wrapper svg,
 .chart-wrapper canvas {
@@ -64,6 +60,9 @@ body, .body {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Ensure cards expand to container width inside chart sections */
+.chart-wrapper .card { width: 100%; }
 
 /* Utility: center any block */
 .center {

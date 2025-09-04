@@ -47,11 +47,11 @@ style: custom-style.css
   }
 
   /* Dark Mode */
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     .chart-title, .chart-legend {
-      fill: white; /* Title and legend text in white */
+      fill: white; 
     }
-  }
+  } */
 
   svg {
     max-width: 100%; /* Ensure the SVG scales within its container */
