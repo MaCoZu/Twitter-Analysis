@@ -76,7 +76,6 @@ style: custom-style.css
 <div class="chart-wrapper">
   <div class="text-container">
     <h2>Tweets over time</h2>
-    <h2>Tweets over time</h2>
     <p>
       Twitter activity has risen continuously over the observed timespan. After 2010, Twitter gained prominence as a tool for political communication. The 545 tracked politicians joined the platform bit by bit, with surges every 2 years at the midterm elections, when the entire House of Representatives and one-third of the Senate is up for reelection. I counted the number of first tweets per week as a proxy for the new arrival of politicians to the platform.
     </p>
