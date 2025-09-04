@@ -7,13 +7,13 @@
 <title>Tweet Times | Twitter Analysis</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_import/custom-style.4de76100.css">
+<link rel="preload" as="style" href="./_import/custom-style.2e7058ea.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_import/custom-style.4de76100.css">
+<link rel="stylesheet" type="text/css" href="./_import/custom-style.2e7058ea.css">
 <link rel="modulepreload" href="./_observablehq/client.3f44bbd9.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.82806664.js">
-<link rel="modulepreload" href="./_import/components/tweets_times.f3467172.js">
+<link rel="modulepreload" href="./_import/components/tweets_times.404345fb.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
@@ -71,7 +71,7 @@ resize((width) => data_on && user_onboarding(data_on, "#chart-on", { width: 800 
 }});
 
 define({id: "62c94e42", inputs: ["FileAttachment","d3"], outputs: ["user_onboarding","data_on"], body: async (FileAttachment,d3) => {
-const {user_onboarding} = await import("./_import/components/tweets_times.f3467172.js");
+const {user_onboarding} = await import("./_import/components/tweets_times.404345fb.js");
 
 const data_on = await FileAttachment("./data/user_onboarding.csv")
    .csv({ typed: true })
@@ -90,7 +90,7 @@ resize((width) => data_ym && tweets_ym(data_ym, "#chart-ym", { width:750 }))
 }});
 
 define({id: "9c8d3d77", inputs: ["d3","FileAttachment"], outputs: ["tweets_ym","parseDate","data_ym"], body: async (d3,FileAttachment) => {
-const {tweets_ym} = await import("./_import/components/tweets_times.f3467172.js");
+const {tweets_ym} = await import("./_import/components/tweets_times.404345fb.js");
 
 const parseDate = d3.timeParse("%m/%d/%Y");
 const data_ym = await FileAttachment("./data/times_ym.csv")
@@ -412,7 +412,7 @@ Twitter activity rises from January and peaks in June. In the summer recess betw
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Twitter Analysis</span></a><a rel="next" href="./02_friends_followers"><span>Friends &amp; Followers</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-17T16:22:01">Apr 17, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-09-04T16:33:00">Sep 4, 2025</a>.</div>
 </footer>
 </div>
 </body>

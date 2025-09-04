@@ -7,10 +7,10 @@
 <title>Friends &amp; Followers | Twitter Analysis</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="preload" as="style" href="./_import/custom-style.2e7058ea.css">
 <link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
+<link rel="stylesheet" type="text/css" href="./_import/custom-style.2e7058ea.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
 <link rel="modulepreload" href="./_observablehq/client.3f44bbd9.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
@@ -317,39 +317,36 @@ return {Inputs,values,q1,q3,iqr,lowerBound,upperBound,dataWithOutliers,dataWitho
   flex-direction: column;
   align-items: center; 
   max-width: 750px; 
-  justify-content: center; 
-  margin: 20px auto; 
-  text-align: center; 
+  justify-content: center; /* Center horizontally */
+  margin: 20px auto; /* Center the container within the page and add spacing */
+  text-align: center; /* Match the alignment with text */
 }
 
-.text-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
+.text-container {
   text-align: left; 
   margin: 20px auto; 
-  max-width: 750px; 
+  max-width: 1200px; 
   line-height: 1.4; 
   font-size: 22px;
   font-family: "Calibri", Arial, sans-serif;
 }
 
 
-    .plot-title {
-    font-size: 28px;        /* Larger title font size */
-    font-weight: bold;      /* Bold text */
-    color: darkblue;        /* Title color */
-    text-align: center;     /* Center the title */
-    font-family: "Georgia", serif; /* Custom font family */
-    margin-bottom: 20px;    /* Add spacing below the title */
-    text-transform: uppercase; /* Uppercase letters */
-    letter-spacing: 1px;    /* Spacing between letters */
-    text-align: center;   /* Center the title */
-    font-size: 28px;      /* Increase the font size */
-    font-weight: bold;    /* Bold title */
-    font-family: "Arial, sans-serif"; /* Custom font */
-    margin-top: 20px;     /* Add spacing above */
-  }
+.plot-title {
+  font-size: 28px;        /* Larger title font size */
+  font-weight: bold;      /* Bold text */
+  color: darkblue;        /* Title color */
+  text-align: center;     /* Center the title */
+  font-family: "Georgia", serif; /* Custom font family */
+  margin-bottom: 20px;    /* Add spacing below the title */
+  text-transform: uppercase; /* Uppercase letters */
+  letter-spacing: 1px;    /* Spacing between letters */
+  text-align: center;   /* Center the title */
+  font-size: 28px;      /* Increase the font size */
+  font-weight: bold;    /* Bold title */
+  font-family: "Arial, sans-serif"; /* Custom font */
+  margin-top: 20px;     /* Add spacing above */
+}
 
   /* Default (Light Mode) */
   .chart-title, .chart-legend {
@@ -357,11 +354,11 @@ return {Inputs,values,q1,q3,iqr,lowerBound,upperBound,dataWithOutliers,dataWitho
   }
 
   /* Dark Mode */
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     .chart-title, .chart-legend {
-      fill: white; /* Title and legend text in white */
+      fill: white; 
     }
-  }
+  } */
 
   svg {
     max-width: 100%; /* Ensure the SVG scales within its container */
@@ -382,12 +379,14 @@ return {Inputs,values,q1,q3,iqr,lowerBound,upperBound,dataWithOutliers,dataWitho
     overflow-x: auto; /* Allow horizontal scroll */
   }
 </style>
-  <div class="text-wrapper">
+<div class="chart-wrapper">
+  <div class="text-container">
   <h2>Friends &amp; Followers</h2>
-  <p>
-  Some accounts have a pretty outsized followership, which skews the distribution of followers. For instance, Trump has often been criticized for having an army of bots supporting him. His two Twitter accounts break the mold in terms of followers while having few friends. Despite the presence of a substantial bot network — <a href="https://en.wikipedia.org/wiki/Trump's_network" target="_blank" rel="noopener noreferrer">numbering in the tens of thousands</a> —  Trump can't be ignored. He remains an influential figure and people around the world closely monitor his statements to gauge the American mood. Additionally, Trump ranks highest in terms of likes and retweets, which has to be taken with a grain of salt, considering the bots.
-  </p>
+    <p>
+    Some accounts have a pretty outsized followership, which skews the distribution of followers. For instance, Trump has often been criticized for having an army of bots supporting him. His two Twitter accounts break the mold in terms of followers while having few friends. Despite the presence of a substantial bot network — <a href="https://en.wikipedia.org/wiki/Trump's_network" target="_blank" rel="noopener noreferrer">numbering in the tens of thousands</a> —  Trump can't be ignored. He remains an influential figure and people around the world closely monitor his statements to gauge the American mood. Additionally, Trump ranks highest in terms of likes and retweets, which has to be taken with a grain of salt, considering the bots.
+    </p>
   </div>
+</div>
 <div class="observablehq observablehq--block"><!--:7596d30c:--></div>
 <div class="observablehq observablehq--block"><!--:ef924fba:--></div>
 <div class="chart-wrapper">
@@ -395,11 +394,13 @@ return {Inputs,values,q1,q3,iqr,lowerBound,upperBound,dataWithOutliers,dataWitho
     <observablehq-loading></observablehq-loading><!--:6facdc64:-->
   </div>
 </div>
-  <div class="text-wrapper">
+<div class="chart-wrapper">
+  <div class="text-container">
   <h2>Distributions</h2>
   <p>
   The average (mean) followership is 162,434 while the median is just a tenth of that 16,732. Suggesting a highly skewed distribution of followership. The mean of followership without outliers is 18,179 (median: 14,061).
   </p>
+  </div>
   </div>
 <div class="chart-wrapper">
   <div>
@@ -407,19 +408,19 @@ return {Inputs,values,q1,q3,iqr,lowerBound,upperBound,dataWithOutliers,dataWitho
   </div>
 </div>
 <div class="observablehq observablehq--block"><!--:62658032:--></div>
- <div class="text-wrapper">
-  <h2>Distributions</h2>
+<div class="chart-wrapper">
+  <div class="text-container">
   <p>
   Average friendships without outliers are 894 (median: 650) you can can see the sek by switching to 'with outliers'.
   </p>
-  </div>
  <div class="text-wrapper">
 <div class="observablehq observablehq--block"><!--:bf0e20f3:--></div>
+  </div>
  </div>
-</main>
+</div></main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./01_tweet_times"><span>Tweet Times</span></a><a rel="next" href="./03_likes_retweets"><span>Likes &amp; Retweets</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-17T16:22:01">Apr 17, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-09-04T16:33:00">Sep 4, 2025</a>.</div>
 </footer>
 </div>
 </body>

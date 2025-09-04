@@ -186,7 +186,7 @@
                 .attr("y", 5)
                 .text(year)
                 .style("font", "18px sans-serif")
-                .style("alignment-baseline", "middle");
+                    .style("alignment-baseline", "middle");
         })
 
         // Title
@@ -349,7 +349,8 @@
             .text("Number of Tweets over Time");
 
         return svg.node();
-    };
+};
+    
     export function user_onboarding(data, parentId, { width }) {
         // Set the dimensions and margins of the graph
         const margin = { top: 60, right: 40, bottom: 30, left: 40 };
@@ -462,6 +463,7 @@
         svg.append("text")
             .attr("class", "chart-title")
             .style("font", "bold 20px sans-serif")
+            .style("fill", "black")
             .attr("text-anchor", "middle")
             .attr("x", (width + margin.left) / 2)
             .attr("y", margin.top / 2)
