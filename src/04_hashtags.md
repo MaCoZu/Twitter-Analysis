@@ -5,40 +5,20 @@ style: custom-style.css
 ---
 
 <style>
-/* Chart Wrapper: Center charts and text */
-.chart-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 900px;
-}
-
 /* Global Wrapper: Center all page content */
-.page-wrapper {
+.chart-wrapper {
+    margin: 40px auto; /* Override global margin for this page */
+    max-width: 900px; 
     display: flex;
     flex-direction: column;
     align-items: center; /* Center content horizontally */
-    margin: 0 auto; /* Center the wrapper itself */
-    max-width: 900px; /* Match the text dimensions */
     padding: 20px; /* Add spacing around the edges */
     box-sizing: border-box;
 }
 
-/* Text Container: Style the text block */
+/* Page-specific text container override */
 .text-container {
-    text-align: left;
-    margin: 20px auto;
-    max-width: 1200px;
-    line-height: 1.4;
-    font-size: 22px;
-    font-family: "Calibri", Arial, sans-serif;
-}
-
-.body{
-  max-width: 900px;
-  margin: 20px auto;
-  max-width: 1200px;
+    font-size: 22px; /* Override global font size for this page */
 }
 
 svg {
@@ -55,6 +35,7 @@ svg {
   </p>
   </div>
 </div>
+
 
 ```js
 import {FileAttachment, resize} from "observablehq:stdlib";
@@ -264,7 +245,7 @@ ${display(hash_table)}
 
 <div class="chart-wrapper">
   <div class="text-container">
-<img src="./img/top10_hash.png">
+    <img src="./img/top10_hash.png">  
   </div>
 </div>
 

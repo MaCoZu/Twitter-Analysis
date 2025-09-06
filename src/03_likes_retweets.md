@@ -5,21 +5,15 @@ style: custom-style.css
 ---
 
 <style>
+/* Page-specific chart wrapper override */
 .chart-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers the chart and text container horizontally */
-  margin: 40px auto; /* Center the wrapper itself */
+  margin: 40px auto; /* Override global margin for this page */
   max-width: 900px; /* Adjust line length */
 }
 
+/* Page-specific text container override */
 .text-container {
-  text-align: left; /* Left-align the text */
-  margin: 20px auto; /* Increase side margins for better spacing */
-  max-width: 1200px; /* Increase this value for a longer text line */
-  line-height: 1.4; /* Improve readability */
-  font-size: 22px;
-  font-family: "Calibri", Arial, sans-serif;
+  font-size: 22px; /* Override global font size for this page */
 }
 
 

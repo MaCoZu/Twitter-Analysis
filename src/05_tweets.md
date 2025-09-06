@@ -8,17 +8,9 @@ style: custom-style.css
   .tooltip {
     font-size: inherit;  /* Use inherited size from inline style */
 }
-/* Chart Wrapper: Center charts and text */
-.chart-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 900px;
-}
 
 /* Global Wrapper: Center all page content */
-.page-wrapper {
+.chart-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center; /* Center content horizontally */
@@ -28,20 +20,9 @@ style: custom-style.css
     box-sizing: border-box;
 }
 
-/* Text Container: Style the text block */
+/* Page-specific text container override */
 .text-container {
-    text-align: left;
-    margin: 20px auto;
-    max-width: 1200px;
-    line-height: 1.4;
-    font-size: 22px;
-    font-family: "Calibri", Arial, sans-serif;
-}
-
-.body{
-  max-width: 900px;
-  margin: 20px auto;
-  max-width: 1200px;
+    font-size: 22px; /* Override global font size for this page */
 }
 
 svg {
@@ -55,7 +36,7 @@ svg {
    <h2>Most Liked Tweets</h2>
    <p>Donald Trump dominates the top most liked tweets, but Bernie Sanders has the single most liked tweet in the dataset. Guess who he adresses.</p>
    <blockquote>
-   "President Trump, you made a big mistake. By trying to divide us up by race, religion, gender and nationality you actually brought us closer." &ndash; Bernie Sanders, January 21, 2017
+   <i>"President Trump, you made a big mistake. By trying to divide us up by race, religion, gender and nationality you actually brought us closer."</i> &ndash; Bernie Sanders, January 21, 2017
    </blockquote>
    <p>Hover over the rectangles to see the actual tweet and number of likes.</p>
   </div>

@@ -6,31 +6,24 @@ style: custom-style.css
 
 
 <style>
+/* Page-specific body override */
 .body {
-    font-family: 'Calibri', Arial, sans-serif;
     font-size: 20px;
     line-height: 1.5;
-    text-align: left;
 }
 
-.chart-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  margin: 0 auto; 
-  max-width: 900px; 
-}
-
+/* Page-specific text container override */
 .text-container {
-  text-align: left; 
-  margin: 20px auto; 
-  max-width: 1200px; 
-  line-height: 1.4; 
-  font-size: 22px;
-  font-family: "Calibri", Arial, sans-serif;
+  font-size: 22px; 
+  align-items: center; /* Center content horizontally */
+  margin: 0 auto; /* Center the wrapper itself */
+  max-width: 900px; /* Match the text dimensions */
+  padding: 20px; /* Add spacing around the edges */
 }
 </style>
- <div class="text-container">
+
+
+<div class="text-container">
 
 # Databricks Notebooks
 
@@ -50,4 +43,4 @@ https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93e
 https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/776545636391580/3808253789175109/8517843951181241/latest.html
 
 
-  </div>
+</div>

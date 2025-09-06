@@ -5,23 +5,15 @@ style: custom-style.css
 ---
 
 <style>
+/* Page-specific chart wrapper override */
 .chart-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
   max-width: 750px; 
-  justify-content: center; /* Center horizontally */
-  margin: 20px auto; /* Center the container within the page and add spacing */
   text-align: center; /* Match the alignment with text */
 }
 
+/* Page-specific text container override */
 .text-container {
-  text-align: left; 
-  margin: 20px auto; 
-  max-width: 1200px; 
-  line-height: 1.4; 
-  font-size: 22px;
-  font-family: "Calibri", Arial, sans-serif;
+  font-size: 22px; /* Override global font size for this page */
 }
 
 
@@ -44,13 +36,6 @@ style: custom-style.css
   /* Default (Light Mode) */
   .chart-title, .chart-legend {
     fill: black; /* Title and legend text in black */
-  }
-
-  /* Dark Mode */
-  @media (prefers-color-scheme: dark) {
-    .chart-title, .chart-legend {
-      fill: white; /* Title and legend text in white */
-    }
   }
 
   svg {

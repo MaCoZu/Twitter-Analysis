@@ -79,6 +79,46 @@ body, .body {
   fill: var(--text-color, black);
 }
 
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--theme-foreground-focus, rgb(8, 103, 25));
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  font-style: italic;
+  color: #333;
+  border-radius: 0 4px 4px 0;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* Navigation elements */
+nav {
+  font-family: "Calibri", Arial, sans-serif;
+}
+
+nav a {
+  color: var(--theme-foreground-focus, rgb(8, 103, 25));
+  text-decoration: none;
+  font-weight: 500;
+  font-size: larger;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Observable sidebar navigation */
+#observablehq-sidebar {
+  font-family: "Calibri", Arial, sans-serif;
+}
+
+#observablehq-sidebar a {
+  color: var(--text-color, black);
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root { --text-color: white; }
 } */
